@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discounts & Promotions - AmazeCart</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <style>
+    /* Hero Banner */
+    .promo-hero {
+      background: linear-gradient(135deg, #1e40af 0%, #7c3aed 100%);
+      border-radius: 16px;
+      padding: 50px 40px;
+      color: #fff;
+      text-align: center;
+      margin: 40px 0 36px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .promo-hero::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.07);
+    }
+
+    .promo-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -30px;
+      width: 260px; height: 260px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+    }
+
+    .promo-hero h1 {
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .promo-hero p {
+      font-size: 16px;
+      opacity: 0.85;
+      max-width: 480px;
+      margin: 0 auto 22px;
+    }
+
+    /* Countdown Timer */
+    .countdown {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .countdown-unit {
+      background: rgba(255,255,255,0.15);
+      border-radius: 10px;
+      padding: 10px 18px;
+      min-width: 70px;
+    }
+
+    .countdown-unit .num {
+      font-size: 28px;
+      font-weight: 800;
+      display: block;
+      line-height: 1;
+    }
+
+    .countdown-unit .lbl {
+      font-size: 11px;
+      opacity: 0.75;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* Filter tabs */
+    .promo-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .promo-tab {
+      padding: 9px 20px;
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+      background: var(--surface-color);
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      font-family: inherit;
+      transition: all 0.2s ease;
+    }
+
+    .promo-tab.active,
+    .promo-tab:hover {
+      background: var(--accent-primary);
+      color: #fff;
+      border-color: var(--accent-primary);
+    }
+
+    /* Promo Grid */
+    .promo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+      margin-bottom: 50px;
+    }
+
+    .promo-card {
+      background: var(--surface-color);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .promo-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .promo-card-top {
+      padding: 22px 22px 14px;
+      border-bottom: 1px dashed var(--border-color);
+    }
+
+    .promo-type-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .badge-flash    { background: rgba(239,68,68,0.12); color: #dc2626; }
+    .badge-seasonal { background: rgba(245,158,11,0.12); color: #d97706; }
+    .badge-bundle   { background: rgba(16,185,129,0.12); color: #059669; }
+    .badge-clearance{ background: rgba(139,92,246,0.12); color: #7c3aed; }
+
+    .promo-discount {
+      font-size: 40px;
+      font-weight: 800;
+      color: var(--accent-primary);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .promo-card h3 {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .promo-card p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .promo-card-bottom {
+      padding: 16px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex: 1;
+      align-items: flex-end;
+    }
+
+    .coupon-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .coupon-code {
+      background: var(--bg-color);
+      border: 1.5px dashed var(--accent-primary);
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      font-family: monospace;
+      color: var(--accent-primary);
+      letter-spacing: 0.08em;
+    }
+
+    .copy-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-secondary);
+      font-size: 14px;
+      padding: 5px;
+      border-radius: 4px;
+      transition: color 0.2s;
+      font-family: inherit;
+    }
+
+    .copy-btn:hover { color: var(--accent-primary); }
+
+    .promo-expires {
+      font-size: 12px;
+      color: var(--text-secondary);
+      text-align: right;
+    }
+
+    .promo-expires strong {
+      display: block;
+      color: var(--error-color);
+    }
+
+    /* Coupon input section */
+    .coupon-section {
+      background: var(--surface-color);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .coupon-section h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .coupon-section p {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .coupon-input-row {
+      display: flex;
+      gap: 10px;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .coupon-input-row input {
+      flex: 1;
+      padding: 11px 16px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      background: var(--bg-color);
+      color: var(--text-primary);
+      font-family: monospace;
+      font-size: 15px;
+      letter-spacing: 0.06em;
+    }
+
+    .coupon-input-row input:focus {
+      outline: none;
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 22px;
+      background: var(--accent-primary);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.2s ease;
+    }
+
+    .btn-primary:hover { background: var(--accent-hover); }
+
+    .coupon-result {
+      margin-top: 14px;
+      font-size: 14px;
+      font-weight: 600;
+      display: none;
+    }
+
+    .coupon-result.valid   { color: var(--success-color); }
+    .coupon-result.invalid { color: var(--error-color); }
+
+    /* Section title */
+    .section-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .section-title-row h2 {
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: var(--surface-color);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 14px 20px;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: 9999;
+    }
+
+    .toast.show { transform: translateY(0); opacity: 1; }
+    .toast i { color: var(--success-color); }
+
+    /* No results */
+    .no-results {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-secondary);
+      display: none;
+    }
+
+    .no-results i { font-size: 40px; margin-bottom: 14px; display: block; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container top-bar">
+      <div class="logo">
+        <i class="fas fa-shopping-cart"></i>
+        <span>AmazeCart</span>
+      </div>
+      <div class="nav-icons">
+        <div class="controls">
+          <button id="theme-toggle" class="theme-toggle">
+            <i class="fas fa-moon"></i> Dark Mode
+          </button>
+        </div>
+        <a href="cart.html" class="nav-icon" title="Cart">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="badge cart-count">0</span>
+        </a>
+      </div>
+    </div>
+    <nav class="main-nav">
+      <div class="container">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">All Products</a></li>
+          <li><a href="products.html?category=electronics">Electronics</a></li>
+          <li><a href="products.html?category=fashion">Fashion</a></li>
+          <li><a href="product-details.html">Featured Item</a></li>
+          <li><a href="discounts.html" style="color: var(--accent-primary); font-weight: 600;">Discounts & Promos</a></li>
+          <li><a href="feedback.html">Customer Support</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    <!-- Hero -->
+    <div class="promo-hero">
+      <h1>🔥 Deals & Promotions</h1>
+      <p>Exclusive offers, seasonal sales, and coupon codes — all in one place. Don't miss out!</p>
+      <div class="countdown" id="countdown">
+        <div class="countdown-unit"><span class="num" id="cd-hours">00</span><span class="lbl">Hours</span></div>
+        <div class="countdown-unit"><span class="num" id="cd-mins">00</span><span class="lbl">Mins</span></div>
+        <div class="countdown-unit"><span class="num" id="cd-secs">00</span><span class="lbl">Secs</span></div>
+      </div>
+      <p style="margin-top:12px; font-size:13px; opacity:0.7;">Flash sale ends at midnight</p>
+    </div>
+
+    <!-- Coupon Validator -->
+    <div class="coupon-section">
+      <h2><i class="fas fa-ticket-alt" style="color: var(--accent-secondary); margin-right: 8px;"></i> Have a Coupon Code?</h2>
+      <p>Enter your code below to verify its discount before checkout.</p>
+      <div class="coupon-input-row">
+        <input type="text" id="coupon-input" placeholder="e.g. SAVE20" maxlength="20">
+        <button class="btn-primary" id="apply-coupon-btn">
+          <i class="fas fa-check"></i> Apply
+        </button>
+      </div>
+      <div class="coupon-result" id="coupon-result"></div>
+    </div>
+
+    <!-- Promo Cards -->
+    <div class="section-title-row">
+      <h2>Active Promotions</h2>
+      <span id="promo-count" style="font-size:14px; color:var(--text-secondary);">6 offers available</span>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="promo-tabs">
+      <button class="promo-tab active" data-filter="all">All Deals</button>
+      <button class="promo-tab" data-filter="flash">Flash Sale</button>
+      <button class="promo-tab" data-filter="seasonal">Seasonal</button>
+      <button class="promo-tab" data-filter="bundle">Bundle</button>
+      <button class="promo-tab" data-filter="clearance">Clearance</button>
+    </div>
+
+    <div class="promo-grid" id="promo-grid">
+      <!-- Cards rendered by JS -->
+    </div>
+
+    <div class="no-results" id="no-results">
+      <i class="fas fa-tag"></i>
+      No promotions found in this category.
+    </div>
+
+  </main>
+
+  <!-- Toast -->
+  <div class="toast" id="toast">
+    <i class="fas fa-copy"></i>
+    <span id="toast-msg">Code copied to clipboard!</span>
+  </div>
+
+  <script src="scripts/main.js"></script>
+  <script>
+    // Promotions data
+    const promotions = [
+      {
+        type: 'flash',
+        badgeClass: 'badge-flash',
+        badgeLabel: 'Flash Sale',
+        discount: '30% OFF',
+        title: 'Smartphones Super Sale',
+        desc: 'Get 30% off all smartphones including iPhones and Samsung Galaxy models. Limited time only!',
+        code: 'PHONE30',
+        expires: 'Today Only',
+        expiresUrgent: true,
+      },
+      {
+        type: 'seasonal',
+        badgeClass: 'badge-seasonal',
+        badgeLabel: 'Seasonal',
+        discount: '20% OFF',
+        title: 'Spring Electronics Event',
+        desc: 'Celebrate spring with 20% off laptops and accessories. Perfect time to upgrade your setup.',
+        code: 'SPRING20',
+        expires: 'May 31, 2026',
+        expiresUrgent: false,
+      },
+      {
+        type: 'bundle',
+        badgeClass: 'badge-bundle',
+        badgeLabel: 'Bundle Deal',
+        discount: 'BUY 2\nGET 1',
+        title: 'Footwear Bundle Offer',
+        desc: 'Buy any 2 pairs of shoes and get a 3rd pair free. Mix and match from our full footwear range.',
+        code: 'SHOES3FOR2',
+        expires: 'Apr 30, 2026',
+        expiresUrgent: true,
+      },
+      {
+        type: 'clearance',
+        badgeClass: 'badge-clearance',
+        badgeLabel: 'Clearance',
+        discount: '50% OFF',
+        title: 'Last Season Clearance',
+        desc: 'Massive clearance on previous season items. Huge discounts on selected laptops and phones.',
+        code: 'CLEAR50',
+        expires: 'May 10, 2026',
+        expiresUrgent: false,
+      },
+      {
+        type: 'flash',
+        badgeClass: 'badge-flash',
+        badgeLabel: 'Flash Sale',
+        discount: '15% OFF',
+        title: 'Weekend Laptop Deals',
+        desc: 'This weekend only — 15% off all laptops including MacBook Pro and Asus Zenbook models.',
+        code: 'LAPTOP15',
+        expires: 'This Weekend',
+        expiresUrgent: true,
+      },
+      {
+        type: 'seasonal',
+        badgeClass: 'badge-seasonal',
+        badgeLabel: 'Seasonal',
+        discount: '$25 OFF',
+        title: 'New Customer Welcome',
+        desc: 'First-time shoppers get $25 off their first order over $100. Welcome to AmazeCart!',
+        code: 'WELCOME25',
+        expires: 'Ongoing',
+        expiresUrgent: false,
+      },
+    ];
+
+    // Valid coupon codes for validator
+    const validCoupons = {
+      'PHONE30':    '30% off Smartphones',
+      'SPRING20':   '20% off Electronics',
+      'SHOES3FOR2': 'Buy 2 Get 1 Free on Shoes',
+      'CLEAR50':    '50% off Clearance Items',
+      'LAPTOP15':   '15% off Laptops',
+      'WELCOME25':  '$25 off orders over $100',
+    };
+
+    let activeFilter = 'all';
+
+    function renderPromos(filter) {
+      const grid = document.getElementById('promo-grid');
+      const noResults = document.getElementById('no-results');
+      const countEl = document.getElementById('promo-count');
+      grid.innerHTML = '';
+
+      const filtered = filter === 'all' ? promotions : promotions.filter(p => p.type === filter);
+      countEl.textContent = filtered.length + ' offer' + (filtered.length !== 1 ? 's' : '') + ' available';
+
+      if (filtered.length === 0) {
+        noResults.style.display = 'block';
+        return;
+      }
+      noResults.style.display = 'none';
+
+      filtered.forEach(promo => {
+        const card = document.createElement('div');
+        card.className = 'promo-card';
+        card.innerHTML = `
+          <div class="promo-card-top">
+            <span class="promo-type-badge ${promo.badgeClass}">${promo.badgeLabel}</span>
+            <div class="promo-discount">${promo.discount}</div>
+            <h3>${promo.title}</h3>
+            <p>${promo.desc}</p>
+          </div>
+          <div class="promo-card-bottom">
+            <div class="coupon-wrap">
+              <span class="coupon-code">${promo.code}</span>
+              <button class="copy-btn" data-code="${promo.code}" title="Copy code">
+                <i class="fas fa-copy"></i>
+              </button>
+            </div>
+            <div class="promo-expires">
+              Expires:
+              <strong style="color: ${promo.expiresUrgent ? 'var(--error-color)' : 'var(--text-secondary)'};">${promo.expires}</strong>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      // Copy button events
+      document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+          const code = this.getAttribute('data-code');
+          navigator.clipboard.writeText(code).catch(() => {});
+          showToast('Code "' + code + '" copied!');
+        });
+      });
+    }
+
+    // Tab filter
+    document.querySelectorAll('.promo-tab').forEach(tab => {
+      tab.addEventListener('click', function () {
+        document.querySelectorAll('.promo-tab').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        activeFilter = this.getAttribute('data-filter');
+        renderPromos(activeFilter);
+      });
+    });
+
+    // Coupon validator
+    document.getElementById('apply-coupon-btn').addEventListener('click', () => {
+      const input = document.getElementById('coupon-input').value.trim().toUpperCase();
+      const resultEl = document.getElementById('coupon-result');
+      resultEl.style.display = 'block';
+      if (validCoupons[input]) {
+        resultEl.className = 'coupon-result valid';
+        resultEl.innerHTML = '<i class="fas fa-check-circle"></i> Valid! This code gives you: ' + validCoupons[input];
+      } else if (input === '') {
+        resultEl.className = 'coupon-result invalid';
+        resultEl.innerHTML = '<i class="fas fa-times-circle"></i> Please enter a coupon code.';
+      } else {
+        resultEl.className = 'coupon-result invalid';
+        resultEl.innerHTML = '<i class="fas fa-times-circle"></i> Invalid or expired code. Try one of the codes above!';
+      }
+    });
+
+    document.getElementById('coupon-input').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') document.getElementById('apply-coupon-btn').click();
+    });
+
+    // Countdown to midnight
+    function updateCountdown() {
+      const now = new Date();
+      const midnight = new Date();
+      midnight.setHours(24, 0, 0, 0);
+      const diff = midnight - now;
+      const h = Math.floor(diff / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      document.getElementById('cd-hours').textContent = String(h).padStart(2, '0');
+      document.getElementById('cd-mins').textContent  = String(m).padStart(2, '0');
+      document.getElementById('cd-secs').textContent  = String(s).padStart(2, '0');
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // Toast
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-msg').textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    // Init
+    renderPromos('all');
+  </script>
+</body>
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AmazeCart - Professional Online Shopping</title>
+  <meta name="description" content="AmazeCart is a highly professional e-commerce platform offering premium products with dynamic features.">
+  
+  <!-- FontAwesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+
+ <!-- Header -->
+  <header>
+    <div class="container top-bar">
+      <div class="logo">
+        <i class="fas fa-shopping-cart"></i>
+        <span>AmazeCart</span>
+      </div>
+      
+      <div class="search-bar">
+        <input type="text" placeholder="Search products, brands and categories...">
+        <button type="submit"><i class="fas fa-search"></i></button>
+      </div>
+      
+      <div class="nav-icons">
+        <div class="controls">
+          <button id="theme-toggle" class="theme-toggle">
+            <i class="fas fa-moon"></i> Dark Mode
+          </button>
+          <button id="layout-toggle" class="layout-toggle">
+            <i class="fas fa-columns"></i> Alt Layout
+          </button>
+        </div>
+        
+        <a href="login.html" class="nav-icon" title="Login / Register">
+          <i class="fas fa-user"></i>
+        </a>
+        <div class="nav-icon" title="Wishlist">
+          <i class="fas fa-heart"></i>
+          <span class="badge">0</span>
+        </div>
+        <a href="cart.html" class="nav-icon" title="Cart">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="badge cart-count">0</span>
+        </a>
+      </div>
+    </div>
+    
+    <nav class="main-nav">
+      <div class="container">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">All Products</a></li>
+          <li><a href="products.html?category=electronics">Electronics</a></li>
+          <li><a href="products.html?category=fashion">Fashion</a></li>
+          <li><a href="product-details.html">Featured Item</a></li>
+          <li><a href="discounts.html">Discounts &amp; Promos</a></li>
+          <li><a href="feedback.html">Customer Support</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&q=80&w=2070" alt="Premium electronics banner" class="hero-bg">
+      <div class="hero-content">
+        <h1>Next-Gen Shopping Experience</h1>
+        <p>Discover our new line of premium electronics and accessories with unmatched performance.</p>
+        <a href="products.html" class="btn btn-primary">Shop Now</a>
+      </div>
+    </section>
+
+    <!-- Categories -->
+    <section>
+      <h2 class="section-title">Shop by Category</h2>
+      <!-- Image Links with Captions -->
+      <div style="display: flex; gap: 20px; overflow-x: auto; padding-bottom: 20px;">
+        <figure style="min-width: 200px; border-radius: 8px; overflow: hidden; position: relative;">
+          <a href="products.html?category=electronics">
+            <img src="https://images.unsplash.com/photo-1498049794561-7780e7231661?auto=format&fit=crop&q=80&w=600" alt="Electronics" style="width: 100%; height: 150px; object-fit: cover;">
+            <figcaption style="position: absolute; bottom: 0; background: rgba(0,0,0,0.7); color: white; width: 100%; text-align: center; padding: 10px;">Electronics</figcaption>
+          </a>
+        </figure>
+        <figure style="min-width: 200px; border-radius: 8px; overflow: hidden; position: relative;">
+          <a href="products.html?category=fashion">
+            <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&q=80&w=600" alt="Fashion" style="width: 100%; height: 150px; object-fit: cover;">
+            <figcaption style="position: absolute; bottom: 0; background: rgba(0,0,0,0.7); color: white; width: 100%; text-align: center; padding: 10px;">Fashion</figcaption>
+          </a>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section>
+      <div class="section-title">
+        <h2>Trending Products</h2>
+        <div>
+          <button id="grid-view-btn" class="btn btn-secondary active"><i class="fas fa-th"></i> Grid</button>
+          <button id="list-view-btn" class="btn btn-secondary"><i class="fas fa-list"></i> List</button>
+        </div>
+      </div>
+      
+      <div id="product-container" class="product-grid">
+        <div class="product-card">
+          <span class="badge-discount">-20%</span>
+            <img src="https://cdn.dummyjson.com/product-images/smartphones/iphone-5s/thumbnail.webp" alt="iPhone 5s" class="product-card-img">
+          <div class="product-card-body">
+            <div class="product-category">Smartphones</div>
+            <a href="product-details.html"><h3 class="product-title">iPhone 5s</h3></a>
+            <div class="product-rating">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> (56)
+            </div>
+            <label class="compare-label"><input type="checkbox" class="compare-checkbox" data-id="p1" data-title="iPhone 5s" data-image="https://cdn.dummyjson.com/product-images/smartphones/iphone-5s/thumbnail.webp" data-price="$199.99.00" data-category="Smartphones" data-rating="2.83 / 5"> Compare</label>
+            <div class="product-price-row">
+              <span class="product-price">$199.99.00</span>
+              <button class="add-to-cart-btn" title="Add to Cart"><i class="fas fa-cart-plus"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="https://cdn.dummyjson.com/product-images/smartphones/iphone-6/thumbnail.webp" alt="iPhone 6" class="product-card-img">
+          <div class="product-card-body">
+            <div class="product-category">Smartphones</div>
+            <a href="product-details.html"><h3 class="product-title">iPhone 6</h3></a>
+            <div class="product-rating">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> (68)
+            </div>
+            <label class="compare-label"><input type="checkbox" class="compare-checkbox" data-id="p2" data-title="iPhone 6" data-image="https://cdn.dummyjson.com/product-images/smartphones/iphone-6/thumbnail.webp" data-price="$299.99.00" data-category="Smartphones" data-rating="3.41 / 5"> Compare</label>
+            <div class="product-price-row">
+              <span class="product-price">$299.99.00</span>
+              <button class="add-to-cart-btn" title="Add to Cart"><i class="fas fa-cart-plus"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="https://cdn.dummyjson.com/product-images/smartphones/iphone-13-pro/thumbnail.webp" alt="iPhone 13 Pro" class="product-card-img">
+          <div class="product-card-body">
+            <div class="product-category">Smartphones</div>
+            <a href="product-details.html"><h3 class="product-title">iPhone 13 Pro</h3></a>
+            <div class="product-rating">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> (82)
+            </div>
+            <label class="compare-label"><input type="checkbox" class="compare-checkbox" data-id="p3" data-title="iPhone 13 Pro" data-image="https://cdn.dummyjson.com/product-images/smartphones/iphone-13-pro/thumbnail.webp" data-price="$1099.99.00" data-category="Smartphones" data-rating="4.12 / 5"> Compare</label>
+            <div class="product-price-row">
+              <span class="product-price">$1099.99.00</span>
+              <button class="add-to-cart-btn" title="Add to Cart"><i class="fas fa-cart-plus"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="https://cdn.dummyjson.com/product-images/smartphones/iphone-x/thumbnail.webp" alt="iPhone X" class="product-card-img">
+          <div class="product-card-body">
+            <div class="product-category">Smartphones</div>
+            <a href="product-details.html"><h3 class="product-title">iPhone X</h3></a>
+            <div class="product-rating">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> (50)
+            </div>
+            <label class="compare-label"><input type="checkbox" class="compare-checkbox" data-id="p4" data-title="iPhone X" data-image="https://cdn.dummyjson.com/product-images/smartphones/iphone-x/thumbnail.webp" data-price="$899.99.00" data-category="Smartphones" data-rating="2.51 / 5"> Compare</label>
+            <div class="product-price-row">
+              <span class="product-price">$899.99.00</span>
+              <button class="add-to-cart-btn" title="Add to Cart"><i class="fas fa-cart-plus"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <h4>AmazeCart</h4>
+        <p style="color: var(--text-secondary); margin-bottom: 20px;">The best place to buy premium products online. Quality guaranteed.</p>
+        <div style="display: flex; gap: 10px;">
+          <a href="#"><i class="fab fa-facebook fa-lg"></i></a>
+          <a href="#"><i class="fab fa-twitter fa-lg"></i></a>
+          <a href="#"><i class="fab fa-instagram fa-lg"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">All Products</a></li>
+          <li><a href="feedback.html">Contact Us</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Policies</h4>
+        <ul>
+          <li><a href="#">Return Policy</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 AmazeCart. All rights reserved. Designed for University Project.
+    </div>
+  </footer>
+
+  <!-- Comparison Bar -->
+  <div id="compare-bar" class="compare-bar">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+      <div id="compare-bar-content" class="compare-bar-content">
+      </div>
+      <div class="compare-actions">
+        <span><span id="compare-count">0</span> / 4</span>
+        <button id="clear-compare-btn" class="btn btn-secondary">Clear</button>
+        <button id="compare-btn" class="btn btn-primary">Compare</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comparison Modal -->
+  <div id="compare-modal" class="compare-modal">
+    <div class="compare-modal-content">
+      <button id="close-compare-modal" class="close-modal"><i class="fas fa-times"></i></button>
+      <h2>Product Comparison</h2>
+      <div style="overflow-x: auto;">
+        <table class="compare-table">
+          <thead>
+            <tr id="compare-table-head">
+              <th>Product Feature</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="compare-table-price">
+              <th>Price</th>
+            </tr>
+            <tr id="compare-table-category">
+              <th>Category</th>
+            </tr>
+            <tr id="compare-table-rating">
+              <th>Rating</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="scripts/main.js"></script>
+</body>
+</html>

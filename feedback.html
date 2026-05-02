@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedback & Complaints - AmazeCart</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <style>
+    .feedback-container {
+      max-width: 700px;
+      margin: 60px auto;
+      background: var(--surface-color);
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-color);
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      background: var(--bg-color);
+      color: var(--text-primary);
+      font-family: inherit;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+    
+    /* Custom Validation Error Styles */
+    .input-error {
+      border-color: var(--error-color) !important;
+      background-color: rgba(239, 68, 68, 0.05) !important;
+    }
+    
+    .custom-error-msg {
+      color: var(--error-color);
+      font-size: 12px;
+      margin-top: 5px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .custom-error-msg::before {
+      content: '\f071';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+    }
+    
+    .form-success-msg {
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--success-color);
+      padding: 15px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container top-bar" style="justify-content: center;">
+      <a href="index.html" class="logo">
+        <i class="fas fa-shopping-cart"></i>
+        <span>AmazeCart</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="feedback-container">
+      <h2 style="margin-bottom: 30px; text-align: center;">Customer Feedback & Complaints</h2>
+      
+      <form id="feedback-form" class="custom-validate" novalidate>
+        <div class="form-group">
+          <label for="fb-name">Full Name</label>
+          <input type="text" id="fb-name" name="name" required placeholder="John Doe">
+        </div>
+        
+        <div class="form-group">
+          <label for="fb-email">Email Address</label>
+          <input type="email" id="fb-email" name="email" required placeholder="you@example.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="fb-type">Type of Request</label>
+          <select id="fb-type" name="type" required>
+            <option value="">Select an option...</option>
+            <option value="complaint">Complaint</option>
+            <option value="feedback">General Feedback</option>
+            <option value="support">Technical Support</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="fb-message">Message</label>
+          <textarea id="fb-message" name="message" required placeholder="Please provide detailed information..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Form</button>
+      </form>
+    </div>
+  </main>
+
+  <script src="scripts/validation.js"></script>
+</body>
+</html>

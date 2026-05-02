@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details - AmazeCart</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <style>
+    .product-details-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      margin-top: 40px;
+      margin-bottom: 60px;
+    }
+    
+    .product-images {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .main-image {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+    }
+    
+    .product-info h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+    
+    .price-large {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--accent-primary);
+      margin: 20px 0;
+    }
+    
+    /* Advanced Table Styles */
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      background: var(--surface-color);
+      box-shadow: var(--shadow-sm);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    .custom-table th, .custom-table td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .custom-table th {
+      background-color: rgba(0,0,0,0.02);
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+    
+    .custom-table tr:hover {
+      background-color: rgba(37, 99, 235, 0.02);
+    }
+    
+    .nested-table {
+      width: 100%;
+      background: var(--bg-color);
+      border-radius: 4px;
+    }
+    .nested-table td {
+      border: none;
+      padding: 5px 10px;
+      font-size: 14px;
+    }
+
+    /* Tabs for Details */
+    .tabs-header {
+      display: flex;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 20px;
+      gap: 20px;
+    }
+    .tab-btn {
+      background: none;
+      border: none;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      padding: 10px 0;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+    }
+    .tab-btn.active {
+      color: var(--accent-primary);
+      border-bottom-color: var(--accent-primary);
+    }
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Image Map */
+    .image-map-container {
+      position: relative;
+      margin-top: 30px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 20px;
+      background: var(--surface-color);
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container top-bar">
+      <a href="index.html" class="logo">
+        <i class="fas fa-shopping-cart"></i>
+        <span>AmazeCart</span>
+      </a>
+      <div class="nav-icons">
+        <a href="cart.html" class="nav-icon" title="Cart">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="badge cart-count">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="product-details-container">
+      <!-- Left: Media -->
+      <div class="product-images">
+        <!-- Main Image -->
+        <img src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?auto=format&fit=crop&q=80&w=800" alt="ProBook Laptop" class="main-image">
+        
+        <!-- Video Media -->
+        <h3 style="margin-top:20px;">Product Preview</h3>
+        <video width="100%" controls style="border-radius: 8px; border: 1px solid var(--border-color);">
+          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+          Your browser does not support HTML video.
+        </video>
+        
+        <!-- Audio Media -->
+        <h3 style="margin-top:20px;">Listen to Podcast Review</h3>
+        <audio controls style="width: 100%;">
+          <source src="https://www.w3schools.com/html/horse.ogg" type="audio/ogg">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+
+      <!-- Right: Info -->
+      <div class="product-info">
+        <div class="product-category">Electronics</div>
+        <h1>ProBook Ultra Thin 15"</h1>
+        <div class="product-rating">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> (124 reviews)
+        </div>
+        
+        <div class="price-large">$1,299.99</div>
+        <p style="margin-bottom: 20px; color: var(--text-secondary);">
+          Experience next-level performance with the ProBook Ultra Thin 15". Featuring the latest generation processor, stunning retina display, and all-day battery life.
+        </p>
+
+        <button class="btn btn-primary add-to-cart-btn" style="width: 100%; font-size: 18px; margin-bottom: 30px;">
+          <i class="fas fa-cart-plus"></i> Add to Cart
+        </button>
+
+        <!-- Tabs -->
+        <div class="tabs-header">
+          <button class="tab-btn active" data-target="specs">Specifications</button>
+          <button class="tab-btn" data-target="features">Features Map</button>
+          <button class="tab-btn" data-target="reviews">Reviews</button>
+        </div>
+
+        <div id="specs" class="tab-content active">
+          <!-- Advanced Table with CSS Customization and Nesting -->
+          <table class="custom-table">
+            <thead>
+              <tr>
+                <th>Component</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Processor</td>
+                <td>Intel Core i9 12th Gen</td>
+              </tr>
+              <tr>
+                <td>Memory (RAM)</td>
+                <td>
+                  <!-- Nested Table -->
+                  <table class="nested-table">
+                    <tr><td>Size:</td><td>32 GB</td></tr>
+                    <tr><td>Type:</td><td>DDR5</td></tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td>Storage</td>
+                <td>1TB NVMe SSD</td>
+              </tr>
+              <tr>
+                <td>Display</td>
+                <td>15.6" OLED, 4K Resolution</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div id="features" class="tab-content">
+          <div class="image-map-container">
+            <h4>Interactive Diagram</h4>
+            <p>Click on parts of the laptop to learn more (Image Map Implementation)</p>
+            <img src="https://www.w3schools.com/html/workplace.jpg" alt="Workplace" usemap="#workmap" style="width: 100%; border-radius: 4px; margin-top: 10px;">
+            <map name="workmap">
+              <area shape="rect" coords="34,44,270,350" alt="Computer" href="#" onclick="alert('Computer feature clicked!')">
+              <area shape="rect" coords="290,172,333,250" alt="Phone" href="#" onclick="alert('Phone feature clicked!')">
+              <area shape="circle" coords="337,300,44" alt="Coffee" href="#" onclick="alert('Coffee feature clicked!')">
+            </map>
+          </div>
+        </div>
+
+        <div id="reviews" class="tab-content">
+          <p>Customer reviews will be displayed here.</p>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-bottom">
+      &copy; 2026 AmazeCart.
+    </div>
+  </footer>
+
+  <script src="scripts/main.js"></script>
+</body>
+</html>

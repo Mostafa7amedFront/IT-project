@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Products - AmazeCart</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <style>
+    .products-layout {
+      display: flex;
+      gap: 30px;
+      margin-top: 30px;
+    }
+    .filters-sidebar {
+      width: 250px;
+      background: var(--surface-color);
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      height: fit-content;
+    }
+    .filters-sidebar h3 {
+      margin-bottom: 15px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 10px;
+    }
+    .filter-group {
+      margin-bottom: 20px;
+    }
+    .filter-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+    .main-products {
+      flex: 1;
+    }
+    .products-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      margin-top: 40px;
+      margin-bottom: 60px;
+    }
+    .page-btn {
+      padding: 8px 12px;
+      border: 1px solid var(--border-color);
+      background: var(--surface-color);
+      color: var(--text-primary);
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .page-btn.active {
+      background: var(--accent-primary);
+      color: white;
+      border-color: var(--accent-primary);
+    }
+    
+    /* Layout alternative behavior for this page */
+    body.layout-alternative .products-layout {
+      flex-direction: column;
+    }
+    body.layout-alternative .filters-sidebar {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container top-bar">
+      <a href="index.html" class="logo">
+        <i class="fas fa-shopping-cart"></i>
+        <span>AmazeCart</span>
+      </a>
+      
+      <div class="search-bar">
+        <input type="text" placeholder="Search products...">
+        <button type="submit"><i class="fas fa-search"></i></button>
+      </div>
+      
+      <div class="nav-icons">
+        <div class="controls">
+          <button id="theme-toggle" class="theme-toggle">
+            <i class="fas fa-moon"></i> Dark Mode
+          </button>
+          <button id="layout-toggle" class="layout-toggle">
+            <i class="fas fa-columns"></i> Alt Layout
+          </button>
+        </div>
+        <a href="cart.html" class="nav-icon" title="Cart">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="badge cart-count">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="products-layout">
+      <!-- Sidebar -->
+      <aside class="filters-sidebar">
+        <h3>Filters</h3>
+        <div class="filter-group category-filters">
+          <label><input type="checkbox" value="Smartphones" class="category-filter"> Smartphones</label>
+          <label><input type="checkbox" value="Laptops" class="category-filter"> Laptops</label>
+          <label><input type="checkbox" value="Mens Shoes" class="category-filter"> Mens Shoes</label>
+        </div>
+        <div class="filter-group">
+          <h3>Price Range</h3>
+          <input type="range" id="price-filter" min="0" max="2000" value="2000" style="width:100%;">
+          <div style="text-align: right; margin-top: 5px; color: var(--text-secondary); font-size: 14px;">Up to: $<span id="price-value">2000</span></div>
+        </div>
+      </aside>
+
+      <!-- Products Area -->
+      <div class="main-products">
+        <div class="products-header">
+          <h2>Search Results (12 items)</h2>
+          <div>
+            <button id="grid-view-btn" class="btn btn-secondary active"><i class="fas fa-th"></i> Grid</button>
+            <button id="list-view-btn" class="btn btn-secondary"><i class="fas fa-list"></i> List</button>
+          </div>
+        </div>
+
+        <div id="product-container" class="product-grid">
+          <!-- P1 -->
+          <div class="product-card">
+            <img src="https://cdn.dummyjson.com/product-images/smartphones/iphone-5s/thumbnail.webp" alt="iPhone 5s" class="product-card-img">
+            <div class="product-card-body">
+              <div class="product-category">Smartphones</div>
+              <a href="product-details.html"><h3 class="product-title">iPhone 5s</h3></a>
+              <label class="compare-label"><input type="checkbox" class="compare-checkbox" data-id="p1" data-title="iPhone 5s" data-image="https://cdn.dummyjson.com/product-images/smartphones/iphone-5s/thumbnail.webp" data-price="$199.99.00" data-category="Smartphones" data-rating="2.83 / 5"> Compare</label>
+              <div class="product-price-row">
+                <span class="product-price">$199.99.00</span>
+                <button class="add-to-cart-btn"><i class="fas fa-cart-plus"></i></button>
+              </div>
+            </div>
+          </div>
+          <!-- P2 -->
+          <div class="product-card">
+            <img src="https://cdn.dummyjson.com/product-images/smartphones/iphone-6/thumbnail.webp" alt="iPhone 6" class="product-card-img">
+            <div class="product-card-body">
+              <div class="product-category">Smartphones</div>
+              <a href="product-details.html"><h3 class="product-title">iPhone 6</h3></a>
+              <label class="compare-label"><input type="checkbox" class="compare-checkbox" data-id="p2" data-title="iPhone 6" data-image="https://cdn.dummyjson.com/product-images/smartphones/iphone-6/thumbnail.webp" data-price="$299.99.00" data-category="Smartphones" data-rating="3.41 / 5"> Compare</label>
+              <div class="product-price-row">
+                <span class="product-price">$299.99.00</span>
+                <button class="add-to-cart-btn"><i class="fas fa-cart-plus"></i></button>
+              </div>
+            </div>
+          </div>
+          <!-- P3 -->
+          <div class="product-card">
+            <img src="https://cdn.dummyjson.com/product-images/smartphones/iphone-13-pro/thumbnail.webp" alt="iPhone 13 Pro" class="product-card-img">
+            <div class="product-card-body">
+              <div class="product-category">Smartphones</div>
+              <a href="product-details.html"><h3 class="product-title">iPhone 13 Pro</h3></a>
+              <label class="compare-label"><input type="checkbox" class="compare-checkbox" data-id="p3" data-title="iPhone 13 Pro" data-image="https://cdn.dummyjson.com/product-images/smartphones/iphone-13-pro/thumbnail.webp" data-price="$1099.99.00" data-category="Smartphones" data-rating="4.12 / 5"> Compare</label>
+              <div class="product-price-row">
+                <span class="product-price">$1099.99.00</span>
+                <button class="add-to-cart-btn"><i class="fas fa-cart-plus"></i></button>
+              </div>
+            </div>
+          </div>
+          <!-- P4 -->
+          <div class="product-card">
+            <img src="https://cdn.dummyjson.com/product-images/smartphones/iphone-x/thumbnail.webp" alt="iPhone X" class="product-card-img">
+            <div class="product-card-body">
+              <div class="product-category">Smartphones</div>
+              <a href="product-details.html"><h3 class="product-title">iPhone X</h3></a>
+              <label class="compare-label"><input type="checkbox" class="compare-checkbox" data-id="p4" data-title="iPhone X" data-image="https://cdn.dummyjson.com/product-images/smartphones/iphone-x/thumbnail.webp" data-price="$899.99.00" data-category="Smartphones" data-rating="2.51 / 5"> Compare</label>
+              <div class="product-price-row">
+                <span class="product-price">$899.99.00</span>
+                <button class="add-to-cart-btn"><i class="fas fa-cart-plus"></i></button>
+              </div>
+            </div>
+          </div>
+          <!-- P5 -->
+          <div class="product-card">
+            <img src="https://cdn.dummyjson.com/product-images/smartphones/oppo-a57/thumbnail.webp" alt="Oppo A57" class="product-card-img">
+            <div class="product-card-body">
+              <div class="product-category">Smartphones</div>
+              <a href="product-details.html"><h3 class="product-title">Oppo A57</h3></a>
+              <label class="compare-label"><input type="checkbox" class="compare-checkbox" data-id="p5" data-title="Oppo A57" data-image="https://cdn.dummyjson.com/product-images/smartphones/oppo-a57/thumbnail.webp" data-price="$249.99.00" data-category="Smartphones" data-rating="3.94 / 5"> Compare</label>
+              <div class="product-price-row">
+                <span class="product-price">$249.99.00</span>
+                <button class="add-to-cart-btn"><i class="fas fa-cart-plus"></i></button>
+              </div>
+            </div>
+          </div>
+          <!-- P6 -->
+          <div class="product-card">
+            <img src="https://cdn.dummyjson.com/product-images/smartphones/oppo-f19-pro-plus/thumbnail.webp" alt="Oppo F19 Pro Plus" class="product-card-img">
+            <div class="product-card-body">
+              <div class="product-category">Smartphones</div>
+              <a href="product-details.html"><h3 class="product-title">Oppo F19 Pro Plus</h3></a>
+              <label class="compare-label"><input type="checkbox" class="compare-checkbox" data-id="p6" data-title="Oppo F19 Pro Plus" data-image="https://cdn.dummyjson.com/product-images/smartphones/oppo-f19-pro-plus/thumbnail.webp" data-price="$399.99.00" data-category="Smartphones" data-rating="3.51 / 5"> Compare</label>
+              <div class="product-price-row">
+                <span class="product-price">$399.99.00</span>
+                <button class="add-to-cart-btn"><i class="fas fa-cart-plus"></i></button>
+              </div>
+            </div>
+          </div>
+          <!-- P7 -->
+          <div class="product-card">
+            <img src="https://cdn.dummyjson.com/product-images/smartphones/oppo-k1/thumbnail.webp" alt="Oppo K1" class="product-card-img">
+            <div class="product-card-body">
+              <div class="product-category">Smartphones</div>
+              <a href="product-details.html"><h3 class="product-title">Oppo K1</h3></a>
+              <label class="compare-label"><input type="checkbox" class="compare-checkbox" data-id="p7" data-title="Oppo K1" data-image="https://cdn.dummyjson.com/product-images/smartphones/oppo-k1/thumbnail.webp" data-price="$299.99.00" data-category="Smartphones" data-rating="4.25 / 5"> Compare</label>
+              <div class="product-price-row">
+                <span class="product-price">$299.99.00</span>
+                <button class="add-to-cart-btn"><i class="fas fa-cart-plus"></i></button>
+              </div>
+            </div>
+          </div>
+          <!-- P8 -->
+          <div class="product-card">
+            <img src="https://cdn.dummyjson.com/product-images/smartphones/realme-c35/thumbnail.webp" alt="Realme C35" class="product-card-img">
+            <div class="product-card-body">
+              <div class="product-category">Smartphones</div>
+              <a href="product-details.html"><h3 class="product-title">Realme C35</h3></a>
+              <label class="compare-label"><input type="checkbox" class="compare-checkbox" data-id="p8" data-title="Realme C35" data-image="https://cdn.dummyjson.com/product-images/smartphones/realme-c35/thumbnail.webp" data-price="$149.99.00" data-category="Smartphones" data-rating="4.2 / 5"> Compare</label>
+              <div class="product-price-row">
+                <span class="product-price">$149.99.00</span>
+                <button class="add-to-cart-btn"><i class="fas fa-cart-plus"></i></button>
+              </div>
+            </div>
+          </div>
+          <!-- P9 -->
+          <div class="product-card">
+            <img src="https://cdn.dummyjson.com/product-images/smartphones/realme-x/thumbnail.webp" alt="Realme X" class="product-card-img">
+            <div class="product-card-body">
+              <div class="product-category">Smartphones</div>
+              <a href="product-details.html"><h3 class="product-title">Realme X</h3></a>
+              <label class="compare-label"><input type="checkbox" class="compare-checkbox" data-id="p9" data-title="Realme X" data-image="https://cdn.dummyjson.com/product-images/smartphones/realme-x/thumbnail.webp" data-price="$299.99.00" data-category="Smartphones" data-rating="3.7 / 5"> Compare</label>
+              <div class="product-price-row">
+                <span class="product-price">$299.99.00</span>
+                <button class="add-to-cart-btn"><i class="fas fa-cart-plus"></i></button>
+              </div>
+            </div>
+          </div>
+          <!-- P10 -->
+          <div class="product-card">
+            <img src="https://cdn.dummyjson.com/product-images/smartphones/realme-xt/thumbnail.webp" alt="Realme XT" class="product-card-img">
+            <div class="product-card-body">
+              <div class="product-category">Smartphones</div>
+              <a href="product-details.html"><h3 class="product-title">Realme XT</h3></a>
+              <label class="compare-label"><input type="checkbox" class="compare-checkbox" data-id="p10" data-title="Realme XT" data-image="https://cdn.dummyjson.com/product-images/smartphones/realme-xt/thumbnail.webp" data-price="$349.99.00" data-category="Smartphones" data-rating="4.58 / 5"> Compare</label>
+              <div class="product-price-row">
+                <span class="product-price">$349.99.00</span>
+                <button class="add-to-cart-btn"><i class="fas fa-cart-plus"></i></button>
+              </div>
+            </div>
+          </div>
+          <!-- P11 -->
+          <div class="product-card">
+            <img src="https://cdn.dummyjson.com/product-images/smartphones/samsung-galaxy-s7/thumbnail.webp" alt="Samsung Galaxy S7" class="product-card-img">
+            <div class="product-card-body">
+              <div class="product-category">Smartphones</div>
+              <a href="product-details.html"><h3 class="product-title">Samsung Galaxy S7</h3></a>
+              <label class="compare-label"><input type="checkbox" class="compare-checkbox" data-id="p11" data-title="Samsung Galaxy S7" data-image="https://cdn.dummyjson.com/product-images/smartphones/samsung-galaxy-s7/thumbnail.webp" data-price="$299.99.00" data-category="Smartphones" data-rating="3.3 / 5"> Compare</label>
+              <div class="product-price-row">
+                <span class="product-price">$299.99.00</span>
+                <button class="add-to-cart-btn"><i class="fas fa-cart-plus"></i></button>
+              </div>
+            </div>
+          </div>
+          <!-- P12 -->
+          <div class="product-card">
+            <img src="https://cdn.dummyjson.com/product-images/smartphones/samsung-galaxy-s8/thumbnail.webp" alt="Samsung Galaxy S8" class="product-card-img">
+            <div class="product-card-body">
+              <div class="product-category">Smartphones</div>
+              <a href="product-details.html"><h3 class="product-title">Samsung Galaxy S8</h3></a>
+              <label class="compare-label"><input type="checkbox" class="compare-checkbox" data-id="p12" data-title="Samsung Galaxy S8" data-image="https://cdn.dummyjson.com/product-images/smartphones/samsung-galaxy-s8/thumbnail.webp" data-price="$499.99.00" data-category="Smartphones" data-rating="4.4 / 5"> Compare</label>
+              <div class="product-price-row">
+                <span class="product-price">$499.99.00</span>
+                <button class="add-to-cart-btn"><i class="fas fa-cart-plus"></i></button>
+              </div>
+            </div>
+          </div>
+          <!-- P13 -->
+          <div class="product-card">
+            <img src="https://cdn.dummyjson.com/product-images/smartphones/samsung-galaxy-s10/thumbnail.webp" alt="Samsung Galaxy S10" class="product-card-img">
+            <div class="product-card-body">
+              <div class="product-category">Smartphones</div>
+              <a href="product-details.html"><h3 class="product-title">Samsung Galaxy S10</h3></a>
+              <label class="compare-label"><input type="checkbox" class="compare-checkbox" data-id="p13" data-title="Samsung Galaxy S10" data-image="https://cdn.dummyjson.com/product-images/smartphones/samsung-galaxy-s10/thumbnail.webp" data-price="$699.99.00" data-category="Smartphones" data-rating="3.06 / 5"> Compare</label>
+              <div class="product-price-row">
+                <span class="product-price">$699.99.00</span>
+                <button class="add-to-cart-btn"><i class="fas fa-cart-plus"></i></button>
+              </div>
+            </div>
+          </div>
+          <!-- P14 -->
+          <div class="product-card">
+            <img src="https://cdn.dummyjson.com/product-images/smartphones/vivo-s1/thumbnail.webp" alt="Vivo S1" class="product-card-img">
+            <div class="product-card-body">
+              <div class="product-category">Smartphones</div>
+              <a href="product-details.html"><h3 class="product-title">Vivo S1</h3></a>
+              <label class="compare-label"><input type="checkbox" class="compare-checkbox" data-id="p14" data-title="Vivo S1" data-image="https://cdn.dummyjson.com/product-images/smartphones/vivo-s1/thumbnail.webp" data-price="$249.99.00" data-category="Smartphones" data-rating="3.5 / 5"> Compare</label>
+              <div class="product-price-row">
+                <span class="product-price">$249.99.00</span>
+                <button class="add-to-cart-btn"><i class="fas fa-cart-plus"></i></button>
+              </div>
+            </div>
+          </div>
+          <!-- P15 -->
+          <div class="product-card">
+            <img src="https://cdn.dummyjson.com/product-images/smartphones/vivo-v9/thumbnail.webp" alt="Vivo V9" class="product-card-img">
+            <div class="product-card-body">
+              <div class="product-category">Smartphones</div>
+              <a href="product-details.html"><h3 class="product-title">Vivo V9</h3></a>
+              <label class="compare-label"><input type="checkbox" class="compare-checkbox" data-id="p15" data-title="Vivo V9" data-image="https://cdn.dummyjson.com/product-images/smartphones/vivo-v9/thumbnail.webp" data-price="$299.99.00" data-category="Smartphones" data-rating="3.6 / 5"> Compare</label>
+              <div class="product-price-row">
+                <span class="product-price">$299.99.00</span>
+                <button class="add-to-cart-btn"><i class="fas fa-cart-plus"></i></button>
+              </div>
+            </div>
+          </div>
+          <!-- P16 -->
+          <div class="product-card">
+            <img src="https://cdn.dummyjson.com/product-images/smartphones/vivo-x21/thumbnail.webp" alt="Vivo X21" class="product-card-img">
+            <div class="product-card-body">
+              <div class="product-category">Smartphones</div>
+              <a href="product-details.html"><h3 class="product-title">Vivo X21</h3></a>
+              <label class="compare-label"><input type="checkbox" class="compare-checkbox" data-id="p16" data-title="Vivo X21" data-image="https://cdn.dummyjson.com/product-images/smartphones/vivo-x21/thumbnail.webp" data-price="$499.99.00" data-category="Smartphones" data-rating="4.26 / 5"> Compare</label>
+              <div class="product-price-row">
+                <span class="product-price">$499.99.00</span>
+                <button class="add-to-cart-btn"><i class="fas fa-cart-plus"></i></button>
+              </div>
+            </div>
+          </div>
+          <!-- P17 -->
+          <div class="product-card">
+            <img src="https://cdn.dummyjson.com/product-images/laptops/apple-macbook-pro-14-inch-space-grey/thumbnail.webp" alt="Apple MacBook Pro 14 Inch Space Grey" class="product-card-img">
+            <div class="product-card-body">
+              <div class="product-category">Laptops</div>
+              <a href="product-details.html"><h3 class="product-title">Apple MacBook Pro 14 Inch Space Grey</h3></a>
+              <label class="compare-label"><input type="checkbox" class="compare-checkbox" data-id="p17" data-title="Apple MacBook Pro 14 Inch Space Grey" data-image="https://cdn.dummyjson.com/product-images/laptops/apple-macbook-pro-14-inch-space-grey/thumbnail.webp" data-price="$1999.99.00" data-category="Laptops" data-rating="3.65 / 5"> Compare</label>
+              <div class="product-price-row">
+                <span class="product-price">$1999.99.00</span>
+                <button class="add-to-cart-btn"><i class="fas fa-cart-plus"></i></button>
+              </div>
+            </div>
+          </div>
+          <!-- P18 -->
+          <div class="product-card">
+            <img src="https://cdn.dummyjson.com/product-images/laptops/asus-zenbook-pro-dual-screen-laptop/thumbnail.webp" alt="Asus Zenbook Pro Dual Screen Laptop" class="product-card-img">
+            <div class="product-card-body">
+              <div class="product-category">Laptops</div>
+              <a href="product-details.html"><h3 class="product-title">Asus Zenbook Pro Dual Screen Laptop</h3></a>
+              <label class="compare-label"><input type="checkbox" class="compare-checkbox" data-id="p18" data-title="Asus Zenbook Pro Dual Screen Laptop" data-image="https://cdn.dummyjson.com/product-images/laptops/asus-zenbook-pro-dual-screen-laptop/thumbnail.webp" data-price="$1799.99.00" data-category="Laptops" data-rating="3.95 / 5"> Compare</label>
+              <div class="product-price-row">
+                <span class="product-price">$1799.99.00</span>
+                <button class="add-to-cart-btn"><i class="fas fa-cart-plus"></i></button>
+              </div>
+            </div>
+          </div>
+          <!-- P19 -->
+          <div class="product-card">
+            <img src="https://cdn.dummyjson.com/product-images/laptops/huawei-matebook-x-pro/thumbnail.webp" alt="Huawei Matebook X Pro" class="product-card-img">
+            <div class="product-card-body">
+              <div class="product-category">Laptops</div>
+              <a href="product-details.html"><h3 class="product-title">Huawei Matebook X Pro</h3></a>
+              <label class="compare-label"><input type="checkbox" class="compare-checkbox" data-id="p19" data-title="Huawei Matebook X Pro" data-image="https://cdn.dummyjson.com/product-images/laptops/huawei-matebook-x-pro/thumbnail.webp" data-price="$1399.99.00" data-category="Laptops" data-rating="4.98 / 5"> Compare</label>
+              <div class="product-price-row">
+                <span class="product-price">$1399.99.00</span>
+                <button class="add-to-cart-btn"><i class="fas fa-cart-plus"></i></button>
+              </div>
+            </div>
+          </div>
+          <!-- P20 -->
+          <div class="product-card">
+            <img src="https://cdn.dummyjson.com/product-images/laptops/lenovo-yoga-920/thumbnail.webp" alt="Lenovo Yoga 920" class="product-card-img">
+            <div class="product-card-body">
+              <div class="product-category">Laptops</div>
+              <a href="product-details.html"><h3 class="product-title">Lenovo Yoga 920</h3></a>
+              <label class="compare-label"><input type="checkbox" class="compare-checkbox" data-id="p20" data-title="Lenovo Yoga 920" data-image="https://cdn.dummyjson.com/product-images/laptops/lenovo-yoga-920/thumbnail.webp" data-price="$1099.99.00" data-category="Laptops" data-rating="2.86 / 5"> Compare</label>
+              <div class="product-price-row">
+                <span class="product-price">$1099.99.00</span>
+                <button class="add-to-cart-btn"><i class="fas fa-cart-plus"></i></button>
+              </div>
+            </div>
+          </div>
+          <!-- P21 -->
+          <div class="product-card">
+            <img src="https://cdn.dummyjson.com/product-images/laptops/new-dell-xps-13-9300-laptop/thumbnail.webp" alt="New DELL XPS 13 9300 Laptop" class="product-card-img">
+            <div class="product-card-body">
+              <div class="product-category">Laptops</div>
+              <a href="product-details.html"><h3 class="product-title">New DELL XPS 13 9300 Laptop</h3></a>
+              <label class="compare-label"><input type="checkbox" class="compare-checkbox" data-id="p21" data-title="New DELL XPS 13 9300 Laptop" data-image="https://cdn.dummyjson.com/product-images/laptops/new-dell-xps-13-9300-laptop/thumbnail.webp" data-price="$1499.99.00" data-category="Laptops" data-rating="2.67 / 5"> Compare</label>
+              <div class="product-price-row">
+                <span class="product-price">$1499.99.00</span>
+                <button class="add-to-cart-btn"><i class="fas fa-cart-plus"></i></button>
+              </div>
+            </div>
+          </div>
+          <!-- P22 -->
+          <div class="product-card">
+            <img src="https://cdn.dummyjson.com/product-images/mens-shoes/nike-air-jordan-1-red-and-black/thumbnail.webp" alt="Nike Air Jordan 1 Red And Black" class="product-card-img">
+            <div class="product-card-body">
+              <div class="product-category">Mens Shoes</div>
+              <a href="product-details.html"><h3 class="product-title">Nike Air Jordan 1 Red And Black</h3></a>
+              <label class="compare-label"><input type="checkbox" class="compare-checkbox" data-id="p22" data-title="Nike Air Jordan 1 Red And Black" data-image="https://cdn.dummyjson.com/product-images/mens-shoes/nike-air-jordan-1-red-and-black/thumbnail.webp" data-price="$149.99.00" data-category="Mens Shoes" data-rating="4.77 / 5"> Compare</label>
+              <div class="product-price-row">
+                <span class="product-price">$149.99.00</span>
+                <button class="add-to-cart-btn"><i class="fas fa-cart-plus"></i></button>
+              </div>
+            </div>
+          </div>
+          <!-- P23 -->
+          <div class="product-card">
+            <img src="https://cdn.dummyjson.com/product-images/mens-shoes/nike-baseball-cleats/thumbnail.webp" alt="Nike Baseball Cleats" class="product-card-img">
+            <div class="product-card-body">
+              <div class="product-category">Mens Shoes</div>
+              <a href="product-details.html"><h3 class="product-title">Nike Baseball Cleats</h3></a>
+              <label class="compare-label"><input type="checkbox" class="compare-checkbox" data-id="p23" data-title="Nike Baseball Cleats" data-image="https://cdn.dummyjson.com/product-images/mens-shoes/nike-baseball-cleats/thumbnail.webp" data-price="$79.99.00" data-category="Mens Shoes" data-rating="3.88 / 5"> Compare</label>
+              <div class="product-price-row">
+                <span class="product-price">$79.99.00</span>
+                <button class="add-to-cart-btn"><i class="fas fa-cart-plus"></i></button>
+              </div>
+            </div>
+          </div>
+          <!-- P24 -->
+          <div class="product-card">
+            <img src="https://cdn.dummyjson.com/product-images/mens-shoes/puma-future-rider-trainers/thumbnail.webp" alt="Puma Future Rider Trainers" class="product-card-img">
+            <div class="product-card-body">
+              <div class="product-category">Mens Shoes</div>
+              <a href="product-details.html"><h3 class="product-title">Puma Future Rider Trainers</h3></a>
+              <label class="compare-label"><input type="checkbox" class="compare-checkbox" data-id="p24" data-title="Puma Future Rider Trainers" data-image="https://cdn.dummyjson.com/product-images/mens-shoes/puma-future-rider-trainers/thumbnail.webp" data-price="$89.99.00" data-category="Mens Shoes" data-rating="4.9 / 5"> Compare</label>
+              <div class="product-price-row">
+                <span class="product-price">$89.99.00</span>
+                <button class="add-to-cart-btn"><i class="fas fa-cart-plus"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paged Search Results -->
+        <div class="pagination">
+          <button class="page-btn"><i class="fas fa-chevron-left"></i></button>
+          <button class="page-btn active">1</button>
+          <button class="page-btn">2</button>
+          <button class="page-btn">3</button>
+          <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Comparison Bar -->
+  <div id="compare-bar" class="compare-bar">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+      <div id="compare-bar-content" class="compare-bar-content">
+        <!-- Selected items go here -->
+      </div>
+      <div class="compare-actions">
+        <span><span id="compare-count">0</span> / 4</span>
+        <button id="clear-compare-btn" class="btn btn-secondary">Clear</button>
+        <button id="compare-btn" class="btn btn-primary">Compare</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comparison Modal -->
+  <div id="compare-modal" class="compare-modal">
+    <div class="compare-modal-content">
+      <button id="close-compare-modal" class="close-modal"><i class="fas fa-times"></i></button>
+      <h2>Product Comparison</h2>
+      <div style="overflow-x: auto;">
+        <table class="compare-table">
+          <thead>
+            <tr id="compare-table-head">
+              <th>Product Feature</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="compare-table-price">
+              <th>Price</th>
+            </tr>
+            <tr id="compare-table-category">
+              <th>Category</th>
+            </tr>
+            <tr id="compare-table-rating">
+              <th>Rating</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="scripts/main.js"></script>
+</body>
+</html>
